@@ -14,8 +14,10 @@
 //!
 //! Programs end by writing to the port at $FE.
 
+use std::fs;
+
 use emulator_6502::MOS6502;
-use memory::Memory;
+use memory::{Memory, ROM_SIZE};
 
 /// Load the rom file and run it.
 pub fn run_rom(rom_file: &str) {
@@ -43,7 +45,11 @@ fn run_program(memory: &mut Memory<'_, '_>) {
 
 /// Load a rom file.
 fn load_rom(path: &str) -> Vec<u8> {
-    todo!()
+    let rom = fs::read(path).unwrap();
+    if rom.len() != (ROM_SIZE as usize) {
+        panic!("ROM must be 16K exactly")
+    }
+    rom
 }
 
 mod memory {
@@ -54,7 +60,7 @@ mod memory {
         str::Bytes,
     };
 
-    const ROM_SIZE: u16 = 16 * 1024;
+    pub const ROM_SIZE: u16 = 16 * 1024;
     const RAM_SIZE: u16 = ((u16::MAX as usize) + 1 - (ROM_SIZE as usize)) as u16;
     const ROM_BOT: u16 = RAM_SIZE;
 

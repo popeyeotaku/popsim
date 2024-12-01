@@ -43,7 +43,7 @@ RESET   LDA     #<MSG
         LDA     #>MSG
         STA     POINT1+1
         JSR     PRINT
-        JMP     0
+        STA     EOFPRT
 
         .DS     $FFFA-*
         .ASSERT *=$FFFA
