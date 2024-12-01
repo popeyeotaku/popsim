@@ -11,3 +11,5 @@ standard output.
 Standard input returns $00 from $FF on end of file. Since $00 is also a
 possible value, reading from $FE returns $FF if we're truly at end of file,
 $00 otherwise.
+
+Programs end by writing to the port at $FE.
