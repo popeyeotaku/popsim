@@ -12,16 +12,20 @@
 //! possible value, reading from $FE returns $FF if we're truly at end of file,
 //! $00 otherwise.
 
-use clap::Parser;
-use popsim::run_rom;
-
-fn main() {
-    let args = Args::parse();
-    run_rom(&args.rom);
+pub fn run_rom(rom_file: &str) {
+    todo!()
 }
 
-#[derive(Parser)]
-#[command(version)]
-struct Args {
-    rom: String,
+pub fn run_captured(rom_file: &str, stdin: &str) -> String {
+    todo!()
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::run_captured;
+
+    #[test]
+    fn hello_world() {
+        assert_eq!(run_captured("test.bin", "foo"), "\r\n\r\nHELLO, foo!\r\n");
+    }
 }
